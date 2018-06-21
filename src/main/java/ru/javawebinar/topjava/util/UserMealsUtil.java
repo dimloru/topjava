@@ -3,11 +3,14 @@ package ru.javawebinar.topjava.util;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.model.UserMealWithExceed;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class UserMealsUtil {
     public static void main(String[] args) {
@@ -26,6 +29,27 @@ public class UserMealsUtil {
 
     public static List<UserMealWithExceed>  getFilteredWithExceeded(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
         // TODO return filtered list with correctly exceeded field
-        return null;
+
+        Map<LocalDate, List<UserMeal>> mealByDate = mealList.stream().collect(Collectors.groupingBy(UserMeal::getDate));
+
+        Map<LocalDate, Integer> caloriesByDate = mealList.stream()
+                .collect(Collectors.groupingBy(UserMeal::getDate, Collectors.summingInt(UserMeal::getCalories)));
+
+        Map<LocalDate, Integer> datesExceeds = caloriesByDate.entrySet().stream()
+                .filter(e -> e.getValue() > caloriesPerDay)
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+        return mealList.stream()
+                .filter(s -> datesExceeds.keySet().contains(s.getDate())) //filtering meals in "exceed" days
+                .filter(s -> LocalTime.of(s.getDateTime().getHour(), s.getDateTime().getMinute()).isAfter(startTime) &&
+                        LocalTime.of(s.getDateTime().getHour(), s.getDateTime().getMinute()).isBefore(endTime))  //filtering meals in the defined time of day
+                .map(s -> new UserMealWithExceed(s.getDateTime(), s.getDescription(), s.getCalories(), true)) // processing into dto
+                .collect(Collectors.toList()); //collecting result
+
+//                .collect(Collectors.groupingBy(UserMeal::getDateTime, Collectors.summingInt(UserMeal::getCalories)))
+
+
+
+
     }
 }
