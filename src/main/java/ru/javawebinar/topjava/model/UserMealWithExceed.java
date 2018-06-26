@@ -19,6 +19,17 @@ public class UserMealWithExceed {
         this.exceed = exceed;
     }
 
+    public UserMealWithExceed(UserMeal userMeal, boolean exceed) {
+        this.dateTime = userMeal.getDateTime();
+        this.description = userMeal.getDescription();
+        this.calories = userMeal.getCalories();
+        this.exceed = exceed;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
     public LocalDate getDate() {
         return LocalDate.of(dateTime.getYear(), dateTime.getMonth(), dateTime.getDayOfMonth());
     }

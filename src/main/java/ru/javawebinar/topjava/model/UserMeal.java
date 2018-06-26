@@ -31,4 +31,13 @@ public class UserMeal {
     public LocalDate getDate() {
         return LocalDate.of(dateTime.getYear(), dateTime.getMonth(), dateTime.getDayOfMonth());
     }
+
+    @Override
+    public String toString() {
+        return "UserMeal{" +
+                "dateTime=" + dateTime +
+                ", description='" + description + '\'' +
+                ", calories=" + calories +
+                '}';
+    }
 }
