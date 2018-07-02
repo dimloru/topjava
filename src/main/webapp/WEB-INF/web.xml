@@ -26,4 +26,14 @@
         <url-pattern>/meals</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>addServlet</servlet-name>
+        <servlet-class>ru.javawebinar.topjava.web.AddServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addServlet</servlet-name>
+        <url-pattern>/add</url-pattern>
+    </servlet-mapping>
+
 </web-app>

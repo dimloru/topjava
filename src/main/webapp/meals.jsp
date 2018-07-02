@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="ru.javawebinar.topjava.model.MealWithExceed" %>
 
 <html>
 <head>
@@ -42,8 +43,14 @@
             <td>${meal.calories}</td>
         </tr>
     </c:forEach>
-
     </table>
 
+        <h2>Add</h2>
+        <form action="add" method="post">
+            <p>DateTime: <input type="datetime-local" name="datetime" /></p>
+            <p>Description: <input type="text" name="description" /></p>
+            <p>Calories: <input type="text" name="calories" /></p>
+            <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+        </form>
 </body>
 </html>
