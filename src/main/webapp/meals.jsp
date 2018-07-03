@@ -24,6 +24,23 @@
         }
         tr.true { color: red}
         tr.false { color: green}
+        a:link {
+            color: midnightblue;
+            text-decoration: none;
+        }
+        a:visited {
+            color: midnightblue;
+            text-decoration: none;
+        }
+        a:hover {
+            color:lightgray;
+            text-decoration: none;
+            background-color: navy;
+        }
+        a:active {
+            color: darkgray;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -34,6 +51,8 @@
             <th>Time</th>
             <th>Desc</th>
             <th>Calories</th>
+            <th>Update</th>
+            <th>Delete</th>
         </tr>
 
     <c:forEach var="meal" items="${meals}">
@@ -41,6 +60,12 @@
             <td>${meal.dateTime.format(formatter)}</td>
             <td>${meal.description}</td>
             <td>${meal.calories}</td>
+            <td>
+                <a href = "update?id=${meal.id}">update</a>
+            </td>
+            <td>
+                <a href = "delete?id=${meal.id}">delete</a>
+            </td>
         </tr>
     </c:forEach>
     </table>
@@ -49,7 +74,7 @@
         <form action="add" method="post">
             <p>DateTime: <input type="datetime-local" name="datetime" /></p>
             <p>Description: <input type="text" name="description" /></p>
-            <p>Calories: <input type="text" name="calories" /></p>
+            <p>Calories: <input type="number" name="calories" /></p>
             <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
         </form>
 </body>

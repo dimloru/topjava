@@ -36,4 +36,34 @@
         <url-pattern>/add</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>updateServlet</servlet-name>
+        <servlet-class>ru.javawebinar.topjava.web.UpdateServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>updateServlet</servlet-name>
+        <url-pattern>/update</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>putServlet</servlet-name>
+        <servlet-class>ru.javawebinar.topjava.web.PutServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>putServlet</servlet-name>
+        <url-pattern>/put</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>deleteServlet</servlet-name>
+        <servlet-class>ru.javawebinar.topjava.web.DeleteServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteServlet</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+
 </web-app>

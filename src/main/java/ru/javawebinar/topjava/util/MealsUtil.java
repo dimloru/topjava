@@ -1,11 +1,13 @@
 package ru.javawebinar.topjava.util;
 
+import org.slf4j.Logger;
 import ru.javawebinar.topjava.dao.MealData;
 import ru.javawebinar.topjava.dao.MealDataMemoryStorageImpl;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.model.MealWithExceed;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
 import java.util.stream.Collector;
@@ -14,9 +16,11 @@ import java.util.stream.Stream;
 
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toList;
+import static org.slf4j.LoggerFactory.getLogger;
 
 public class MealsUtil {
     private static final MealData mealData = new MealDataMemoryStorageImpl(); // might be autowired
+    private static final Logger log = getLogger(MealsUtil.class);
 
     public static void main(String[] args) {
         List<Meal> meals = mealData.getMeals();
@@ -106,6 +110,57 @@ public class MealsUtil {
     }
 
     public static MealWithExceed createWithExceed(Meal meal, boolean exceeded) {
-        return new MealWithExceed(meal.getDateTime(), meal.getDescription(), meal.getCalories(), exceeded);
+        return new MealWithExceed(meal.getId(), meal.getDateTime(), meal.getDescription(), meal.getCalories(), exceeded);
+    }
+
+
+
+
+//    public static void addMeal(LocalDateTime ldt, String description, int calories) {
+//        mealData.add(ldt, description, calories); // convert string param might be done here = business logic
+//
+//        log.debug("Passing the data");
+//
+//    }
+
+
+
+
+
+    public static void delete(int id) {
+        mealData.delete(id);
+        log.debug("deleting " + id);
+    }
+
+    public static Meal getById(String stirngId) {
+        int id = Integer.parseInt(stirngId);
+        return mealData.getById(id);
+    }
+
+    private static Meal make(String dateTime, String description, String stringCalories) {
+        LocalDateTime ldt;
+        int calories;
+        try {
+            System.out.println(dateTime);
+            System.out.println(stringCalories);
+            ldt = LocalDateTime.parse(dateTime);
+            calories = Integer.parseInt(stringCalories);
+        } catch (Exception e) {
+            log.warn("Add: invalid parameters");
+            return null;
+        }
+        return new Meal(-1, ldt, description, calories);
+    }
+
+    public static void put(String stringId, String dateTime, String description, String stringCalories) {
+        int id;
+        id = Integer.parseInt(stringId);
+        Meal meal = make(dateTime, description, stringCalories);
+        meal.setId(id);
+        mealData.put(id, meal);
+    }
+
+    public static void add(String dateTime, String description, String calories) {
+        mealData.add(make(dateTime, description, calories));
     }
 }
