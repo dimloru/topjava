@@ -125,7 +125,7 @@ public class MealsUtil {
 
 
 
-
+// Next methods should be in service layer, not in static util
 
     public static void delete(int id) {
         mealData.delete(id);
