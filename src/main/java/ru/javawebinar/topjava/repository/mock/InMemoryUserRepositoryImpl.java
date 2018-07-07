@@ -12,6 +12,7 @@ import ru.javawebinar.topjava.util.DateTimeUtil;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 @Repository
 public class InMemoryUserRepositoryImpl implements UserRepository {
@@ -50,10 +51,13 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
     public List<User> getAll() {
         log.info("getAll");
 
-        List<User> result = new ArrayList<>(repository.values());
-        result.sort(Comparator.comparing(AbstractNamedEntity::getName)); //test this stuff
+//        // to hell
+//        List<User> result = new ArrayList<>(repository.values());
+//        result.sort(Comparator.comparing(AbstractNamedEntity::getName)); //test this stuff
 
-        return result;
+        return repository.values().stream()
+                .sorted(Comparator.comparing(AbstractNamedEntity::getName))
+                .collect(Collectors.toList());
     }
 
     @Override
