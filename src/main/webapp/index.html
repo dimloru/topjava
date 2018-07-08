@@ -10,5 +10,24 @@
     <li><a href="users">Users</a></li>
     <li><a href="meals">Meals</a></li>
 </ul>
+
+
+<form method="post" action="meals">
+    <input type="date" name="searchDate" />
+    <input type="time" name="searchTimeStart" />
+    <div>
+        <input type="radio" id="user1" name="users" checked />
+        <label for="user1">User 1</label>
+    </div>
+    <div>
+        <input type="radio" id="user2" name="users" />
+        <label for="user2">User 2</label>
+    </div>
+
+    <button type="submit">Save</button>
+    <button onclick="window.history.back()" type="button">Cancel</button>
+</form>
+
+
 </body>
 </html>
