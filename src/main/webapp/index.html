@@ -12,20 +12,17 @@
 </ul>
 
 
-<form method="post" action="meals">
-    <input type="date" name="searchDate" />
-    <input type="time" name="searchTimeStart" />
+<form method="post" action="login">
     <div>
-        <input type="radio" id="user1" name="users" checked />
+        <input type="radio" id="user1" value="1" name="userId" checked />
         <label for="user1">User 1</label>
     </div>
     <div>
-        <input type="radio" id="user2" name="users" />
+        <input type="radio" id="user2" value="2" name="userId" />
         <label for="user2">User 2</label>
     </div>
 
-    <button type="submit">Save</button>
-    <button onclick="window.history.back()" type="button">Cancel</button>
+    <button type="submit">Select</button>
 </form>
 
 

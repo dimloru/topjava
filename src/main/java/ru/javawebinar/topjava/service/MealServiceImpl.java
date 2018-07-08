@@ -1,5 +1,7 @@
 package ru.javawebinar.topjava.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.javawebinar.topjava.model.Meal;
@@ -13,6 +15,8 @@ import java.util.Collections;
 public class MealServiceImpl implements MealService {
 
     private MealRepository repository;
+
+    private static final Logger log = LoggerFactory.getLogger(MealServiceImpl.class);
 
     @Autowired
     public MealServiceImpl(MealRepository repository) {
@@ -42,8 +46,12 @@ public class MealServiceImpl implements MealService {
 
     @Override
     public Collection<Meal> getAll(int userId) {
+        log.info("Getting All for user {}", userId);
         Collection<Meal> result = repository.getAll(userId);
-        if (result == null || result.isEmpty()) throw new NotFoundException("getAll failed");
+        if (result == null || result.isEmpty()) {
+            log.warn("Getting All for user {} failed", userId);
+            throw new NotFoundException("getAll failed");
+        }
         return result;
     }
 }
