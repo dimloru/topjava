@@ -14,7 +14,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.Collections;
@@ -69,8 +71,31 @@ public class MealRestController {
             case "all": // getAttribute("userId")
             default:
                 log.info("getAll");
+
+                // might be done try - parse, in  case date = kfadsghl
+                // might switch to "post", so no need in the above try block, .../meals in browser, BUT
+                // need to either:
+                // 1. add "action" to processPost method or
+                // 2. change the realization of /meals all, may be add FilteredServlet mapped to /filtered
+                // don't want to spend time on that
+
+                LocalTime startTime = request.getParameter("startTime") == null || request.getParameter("startTime").isEmpty() ?
+                        LocalTime.MIN : LocalTime.parse(request.getParameter("startTime"));
+                LocalTime endTime = request.getParameter("endTime") == null || request.getParameter("endTime").isEmpty() ?
+                        LocalTime.MAX : LocalTime.parse(request.getParameter("endTime"));
+
+                LocalDate startDate = request.getParameter("startDate") == null || request.getParameter("startDate").isEmpty() ?
+                        LocalDate.MIN : LocalDate.parse(request.getParameter("startDate"));
+                LocalDate endDate = request.getParameter("endDate") == null || request.getParameter("endDate").isEmpty() ?
+                        LocalDate.MAX : LocalDate.parse(request.getParameter("endDate"));
+
+//                request.setAttribute("meals",
+//                        MealsUtil.getWithExceeded(service.getAll(SecurityUtil.authUserId()), MealsUtil.DEFAULT_CALORIES_PER_DAY));
+
                 request.setAttribute("meals",
-                        MealsUtil.getWithExceeded(service.getAll(SecurityUtil.authUserId()), MealsUtil.DEFAULT_CALORIES_PER_DAY));
+                        MealsUtil.getFilteredWithExceeded(service.getAll(SecurityUtil.authUserId()), MealsUtil.DEFAULT_CALORIES_PER_DAY,
+                                startTime, endTime, startDate, endDate));
+
                 request.getRequestDispatcher("/meals.jsp").forward(request, response);
                 break;
         }

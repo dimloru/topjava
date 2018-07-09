@@ -14,6 +14,16 @@
         .exceeded {
             color: red;
         }
+
+        fieldset {
+            border: 1px solid #339dc7;
+            /* Чтобы подстраивался под контент */
+            display: inline-block;
+        }
+
+        legend {
+            color: #339dc7;
+        }
     </style>
 </head>
 <body>
@@ -48,6 +58,18 @@
             </tr>
         </c:forEach>
     </table>
+
+    <hr>
+    <fieldset>
+        <legend>Filter Meals:</legend>
+        <form action="meals" method="get">
+            <input type="date" name="startDate"> Start Date<br>
+            <input type="date" name="endDate"> End Date<br>
+            <input type="time" name="startTime"> Start Time<br>
+            <input type="time" name="endTime"> End Time<br>
+            <button type="submit">Save</button> <input type="reset" value="Reset" />
+        </form>
+    </fieldset>
 </section>
 </body>
 </html>

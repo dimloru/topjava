@@ -9,7 +9,6 @@ import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import java.util.Collection;
-import java.util.Collections;
 
 @Service
 public class MealServiceImpl implements MealService {
