@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.service.MealService;
 import ru.javawebinar.topjava.util.MealsUtil;
-import ru.javawebinar.topjava.web.MealServlet;
 import ru.javawebinar.topjava.web.SecurityUtil;
 
 import javax.servlet.ServletException;
@@ -19,7 +18,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Objects;
 
 @Controller
