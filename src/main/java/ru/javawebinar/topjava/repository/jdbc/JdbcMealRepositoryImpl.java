@@ -52,17 +52,21 @@ public class JdbcMealRepositoryImpl implements MealRepository {
             Number newKey = insertMeal.executeAndReturnKey(map);
             meal.setId(newKey.intValue());
         }
-        else if (namedParameterJdbcTemplate.update(
-                "UPDATE meals SET user_id=:userId, date_time=:dateTime, description=:description, " +
-                        "calories=:calories WHERE id=:id", map) == 0) {
-            return null;
+        else {
+            // get userId for mealId and check
+            if (get(meal.getId(), userId) == null ||    //returns null if no Meal with such id belongs to User w/userId
+                    namedParameterJdbcTemplate.update(
+                    "UPDATE meals SET user_id=:userId, date_time=:dateTime, description=:description, " +
+                            "calories=:calories WHERE id=:id", map) == 0) {
+                return null;
+            }
         }
         return meal;
     }
 
     @Override
     public boolean delete(int id, int userId) {
-        return jdbcTemplate.update("DELETE FROM meals WHERE id=?", id) != 0; // ? where userId == ..
+        return jdbcTemplate.update("DELETE FROM meals WHERE id=? AND user_id=?", id, userId) != 0; // return n-r of rows affected
     }
 
     @Override
