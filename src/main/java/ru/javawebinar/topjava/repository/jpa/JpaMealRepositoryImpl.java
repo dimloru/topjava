@@ -11,6 +11,7 @@ import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
@@ -56,7 +57,10 @@ public class JpaMealRepositoryImpl implements MealRepository {
     public Meal get(int id, int userId) {
         User ref = em.getReference(User.class, userId);
 
-        List<Meal> meals = em.createQuery("SELECT m FROM Meal m WHERE m.id=:id AND m.user=:user")
+        // Changed Query to TypedQuery
+        TypedQuery<Meal> q = em.createQuery("SELECT m FROM Meal m WHERE m.id=:id AND m.user=:user", Meal.class);
+
+        List<Meal> meals = q
                 .setParameter("id", id)
                 .setParameter("user", ref)
                 .getResultList();
