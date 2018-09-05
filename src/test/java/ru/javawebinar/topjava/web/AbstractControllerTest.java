@@ -46,7 +46,7 @@ abstract public class AbstractControllerTest {
     protected UserService userService;
 
     @Autowired
-    private WebApplicationContext webApplicationContext;
+    protected WebApplicationContext webApplicationContext;
 
     @PostConstruct
     private void postConstruct() {
