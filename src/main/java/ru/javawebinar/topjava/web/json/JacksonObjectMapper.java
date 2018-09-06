@@ -21,7 +21,8 @@ public class JacksonObjectMapper extends ObjectMapper {
     private static final ObjectMapper MAPPER = new JacksonObjectMapper();
 
     private JacksonObjectMapper() {
-        registerModule(new Hibernate5Module());
+        //customizing json serialization (the case of lazily initialized collections
+        registerModule(new Hibernate5Module()); //this module does NOT serialize lazy collections
 
         registerModule(new JavaTimeModule());
         configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
