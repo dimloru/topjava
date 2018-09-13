@@ -48,9 +48,7 @@ function updateTable() {
 }
 
 function al(enabled, id) {
-
     if(enabled) {
-        alert(id + ' enabled');
         $.ajax({
             type: "POST",
             url: ajaxUrl + "setEnDis/" + id,
@@ -64,7 +62,6 @@ function al(enabled, id) {
         });
 
     } else {
-        alert(id + ' disabled');
         $.ajax({
             type: "POST",
             url: ajaxUrl + "setEnDis/" + id,
@@ -77,6 +74,4 @@ function al(enabled, id) {
             }
         });
     }
-
-// reload page (update table)
 }
