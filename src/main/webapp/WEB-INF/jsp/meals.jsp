@@ -25,24 +25,26 @@
                 </div>
 
                 <div class="col-lg-8">
-                    <form method="post" action="meals/filter">
+                    <form method="post" action="meals/filter" id="filterForm">
                         <dl>
                             <dt><spring:message code="meal.startDate"/>:</dt>
-                            <dd><input type="date" class="form-control" name="startDate" value="${param.startDate}"></dd>
+                            <dd><input type="date" class="form-control" name="startDate" id="startDate" value="${param.startDate}"></dd>
                         </dl>
                         <dl>
                             <dt><spring:message code="meal.endDate"/>:</dt>
-                            <dd><input type="date" class="form-control" name="endDate" value="${param.endDate}"></dd>
+                            <dd><input type="date" class="form-control" name="endDate" id="endDate" value="${param.endDate}"></dd>
                         </dl>
                         <dl>
                             <dt><spring:message code="meal.startTime"/>:</dt>
-                            <dd><input type="time" class="form-control" name="startTime" value="${param.startTime}"></dd>
+                            <dd><input type="time" class="form-control" name="startTime" id="startTime" value="${param.startTime}"></dd>
                         </dl>
                         <dl>
                             <dt><spring:message code="meal.endTime"/>:</dt>
-                            <dd><input type="time" class="form-control" name="endTime" value="${param.endTime}"></dd>
+                            <dd><input type="time" class="form-control" name="endTime" id="endTime" value="${param.endTime}"></dd>
                         </dl>
                         <button type="submit"><spring:message code="meal.filter"/></button>
+                        <button type="button" onclick="resetFilterForm()"><spring:message code="common.reset"/></button>
+
                     </form>
                 </div>
             </div>

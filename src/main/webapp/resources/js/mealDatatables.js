@@ -34,3 +34,20 @@ $(function () {
     });
     makeEditable();
 });
+
+
+function updateTable() {
+    var sD = $('#startDate').val();
+    var eD = $('#endDate').val();
+    var sT = $('#startTime').val();
+    var eT = $('#endTime').val();
+
+    $.get(ajaxUrl + "filter?startDate=" + sD + "&startTime=" + sT + "&endDate=" + eD + "&endTime=" + eT, function (data) {
+        datatableApi.clear().rows.add(data).draw();
+    });
+}
+
+function resetFilterForm() {
+    $("#filterForm").find(":input").val("");
+    return false;
+}

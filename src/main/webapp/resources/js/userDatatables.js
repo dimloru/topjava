@@ -40,3 +40,11 @@ $(function () {
     });
     makeEditable();
 });
+
+function updateTable() {
+    updateTableFiltered();
+
+    $.get(ajaxUrl, function (data) {
+        datatableApi.clear().rows.add(data).draw();
+    });
+}
