@@ -42,9 +42,41 @@ $(function () {
 });
 
 function updateTable() {
-    updateTableFiltered();
-
     $.get(ajaxUrl, function (data) {
         datatableApi.clear().rows.add(data).draw();
     });
+}
+
+function al(enabled, id) {
+
+    if(enabled) {
+        alert(id + ' enabled');
+        $.ajax({
+            type: "POST",
+            url: ajaxUrl + "setEnDis/" + id,
+            data: {
+                state: "false"
+            },
+            success: function () {
+                updateTable();
+                successNoty("State updated");
+            }
+        });
+
+    } else {
+        alert(id + ' disabled');
+        $.ajax({
+            type: "POST",
+            url: ajaxUrl + "setEnDis/" + id,
+            data: {
+                state: "true"
+            },
+            success: function () {
+                updateTable();
+                successNoty("State updated");
+            }
+        });
+    }
+
+// reload page (update table)
 }

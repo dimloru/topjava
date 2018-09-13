@@ -34,4 +34,12 @@ public class AdminAjaxController extends AbstractUserController {
             super.create(user);
         }
     }
+
+    @PostMapping("/setEnDis/{id}")
+    public void setEnDis(@PathVariable("id") int id,
+                         @RequestParam("state") String state) {
+        User u = get(id);
+        u.setEnabled(Boolean.valueOf(state));
+        update(u, u.getId());
+    }
 }

@@ -20,4 +20,17 @@
     <script type="text/javascript" src="webjars/datatables/1.10.19/js/jquery.dataTables.min.js" defer></script>
     <script type="text/javascript" src="webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js" defer></script>
     <script type="text/javascript" src="webjars/noty/3.1.4/lib/noty.min.js" defer></script>
+
+    <%--<style type="text/css">--%>
+
+        <%--tr[data-userEnabled="true"] {--%>
+            <%--color: darkgreen;--%>
+        <%--}--%>
+
+        <%--tr[data-userEnabled="false"] {--%>
+            <%--color: #696969;--%>
+        <%--}--%>
+
+    <%--</style>--%>
+
 </head>
